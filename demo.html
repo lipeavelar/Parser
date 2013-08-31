@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DEMO</title>
+	<script type="text/javascript" src="Parser.js"></script>
+</head>
+<body>
+	x:<input type="text" id="x" value="2" size="5"/><br/>
+	y:<input type="text" id="y" value="3" size="5"/><br/>
+	<input type="text" id="eq" value="2*x+3*(x+y)^2"/><input type="button" value="EVALUATE" onclick="example()"/><br/>
+	<script type="text/javascript">
+	function example(){
+		var ev = new Parser(document.getElementById("eq").value);
+		try{
+			ev.setVariable("x", document.getElementById("x").value);
+		}catch(e){
+			console.log("erro1");
+		}
+		try{
+			ev.setVariable("y", document.getElementById("y").value);
+		}catch(e){
+			console.log("erro2");
+		}
+		alert(ev.evaluate());
+	}
+	</script>
+</body>
+</html>

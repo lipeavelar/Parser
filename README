@@ -1,0 +1,17 @@
+Hi,
+this is a free math parser, that I started for some studies.
+
+The supported operations are:
+-> + (Sum)
+-> - (Subtraction)
+-> * (Multiplication)
+-> / (Division)
+-> ^ (Potenciation)
+
+The variables MUST start with a LETTER(A-z) or UNDERLINE(_) and can have numbers from the second character.
+
+PUBLIC METHODS:
+-> Constructor(exp) = expression that will be evaluated.
+-> setVariable(variable, value) = Create (if not exists) or change a variable value.
+-> changeExpression(exp) = changes expression that will be evaluated.
+-> evaluate() = evaluate the expression with the variables values.
