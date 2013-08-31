@@ -1,5 +1,7 @@
 Hi,
-this is a free math parser, that I started for some studies.
+this is a free math parser, that I started for some studies. This parser is case sensitive, so a is different of A. Which means, pi is diferent of PI.
+
+All the constants MUST BE in lower case or it'll be a variable or invalid symbol.
 
 The supported operations are:
 -> + (Sum)
@@ -8,6 +10,16 @@ The supported operations are:
 -> / (Division)
 -> ^ (Potenciation)
 
+Supported functions
+-> log(a,b): Return logarithm where 'a' is the exponent and 'b' is the base
+-> sin(a), cos(a), tan(a): Return sine, cosine and tangent, respectively, where 'a' is a value in radians
+-> abs(a): Returns the absolute value of 'a'
+-> max(a,b), min(a,b): Return max and min (respectively) between 'a' and 'b'
+
+Supported constants:
+-> pi = 3.141592653589793 (the same value of Math.PI)
+-> e  = 2.718281828459045 (the same value of Math.E)
+
 The variables MUST start with a LETTER(A-z) or UNDERLINE(_) and can have numbers from the second character.
 
 PUBLIC METHODS:
@@ -15,3 +27,9 @@ PUBLIC METHODS:
 -> setVariable(variable, value) = Create (if not exists) or change a variable value.
 -> changeExpression(exp) = changes expression that will be evaluated.
 -> evaluate() = evaluate the expression with the variables values.
+
+###### CHANGELOG ######
+v1.1 
+- Added functions support(log, sin, cos, tan, abs, max, min)
+- Added constants (pi, e)
+- Corrected subtraction bug
