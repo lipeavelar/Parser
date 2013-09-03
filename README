@@ -33,3 +33,7 @@ v1.1
 - Added functions support(log, sin, cos, tan, abs, max, min)
 - Added constants (pi, e)
 - Corrected subtraction bug
+
+v1.2
+- Corrected some bugs
+- Granulated verifyFunction code

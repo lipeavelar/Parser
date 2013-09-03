@@ -72,6 +72,7 @@ function Parser(exp){
 	
 	this.evaluate = function(){
 		var exp = __replaceValues();
+		exp = exp.replace(/\s/g, "");
 		if(/^[^0-9\^\-\+\*\\\(\)]$/g.test(exp)){
 			throw "Some illegal characters or unset variables in the expression.";
 		}
@@ -145,7 +146,7 @@ function Parser(exp){
 	}
 	//PARSER RULES
 	/*
-		number     	= {"0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"."|" "}
+		number     	= {"0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"."}
 		factor  	= number | "(" expression ")" | wordInFunctionsArray"(" factor ["," factor] ")"
 		element 	= factor [{"^" factor}]
 		component  	= element [{("*" | "/") element}]
@@ -171,12 +172,14 @@ function Parser(exp){
 	function __component(exp){
 		var result = 0;
 		result = __element(exp);
-		if(exp[iElement] == "*"){
-			iElement++;
-			result *= __element(exp);
-		} else if(exp[iElement] == "/"){
-			iElement++;
-			result /= __element(exp);
+		while((exp[iElement] == '*' || exp[iElement] == '/') && (iElement < exp.length)){
+			if(exp[iElement] == "*"){
+				iElement++;
+				result *= __element(exp);
+			} else if(exp[iElement] == "/"){
+				iElement++;
+				result /= __element(exp);
+			}
 		}
 		return result;
 	}
@@ -184,9 +187,11 @@ function Parser(exp){
 	function __element(exp){
 		var result = 0;
 		result = __factor(exp);
-		if(exp[iElement] == "^"){
-			iElement++;
-			result = Math.pow(result,__factor(exp));
+		while (exp[iElement] == '^' && iElement < exp.length){
+			if(exp[iElement] == "^"){
+				iElement++;
+				result = Math.pow(result,__factor(exp));
+			}
 		}
 		return result;
 	}
@@ -241,17 +246,14 @@ function Parser(exp){
 	}
 	
 	function __number(exp){
-		var values = new Array("0","1","2","3","4","5","6","7","8","9","."," ");
+		var values = new Array("0","1","2","3","4","5","6","7","8","9",".");
 		var s = "";
 		var pointCount = 0;
 		if((values.indexOf(exp[iElement-1]) > -1 || exp[iElement-1] == ')' || exp[iElement-1] == '(') && (exp[iElement] == '-' || exp[iElement] == '+')){
 			s += exp[iElement++];
 		}
 		while(values.indexOf(exp[iElement]) > -1 && iElement < exp.length){
-			if(exp[iElement] == " "){
-				iElement++;
-				continue;
-			}else if(exp[iElement] == "."){
+			if(exp[iElement] == "."){
 				if(pointCount == 1) throw "Invalid element in column "+iElement.toString()+".";
 				pointCount++;
 			}
@@ -260,4 +262,23 @@ function Parser(exp){
 		if(parseFloat(s) != parseFloat(s)) throw "Invalid element in column "+iElement.toString()+".";
 		return parseFloat(s)
 	}
+	
+	function __verifyFunction(f, a, b){
+		if(f == "sin"){
+			return Math.sin(a);
+		}else if(f == "cos"){
+			return Math.cos(a);
+		}else if(f == "tan"){
+			return Math.tan(a);
+		}else if(f == "log"){
+			return Math.log(a)/Math.log(b);
+		}else if(f == "min"){
+			return Math.min(a,b);
+		}else if(f == "max"){
+			return Math.max(a,b);
+		}else if(f == "abs"){
+			return Math.abs(a);
+		}
+	}
+	
 }
