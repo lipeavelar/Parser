@@ -1,5 +1,5 @@
 Hi,
-this is a free math parser, that I started for some studies. This parser is case sensitive, so a is different of A. Which means, pi is diferent of PI.
+this is a free math parser, that I started for some studies. This parser is case sensitive, so a is different from A. Which means, pi is diferent from PI.
 
 All the constants MUST BE in lower case or it'll be a variable or invalid symbol.
 
@@ -20,7 +20,7 @@ Supported constants:
 -> pi = 3.141592653589793 (the same value of Math.PI)
 -> e  = 2.718281828459045 (the same value of Math.E)
 
-The variables MUST start with a LETTER(A-z) or UNDERLINE(_) and can have numbers from the second character.
+The variables MUST start with a LETTER(A-z) or UNDERLINE(_) and can have numbers from second character.
 
 PUBLIC METHODS:
 -> Constructor(exp) = expression that will be evaluated.
